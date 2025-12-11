@@ -1,0 +1,38 @@
+name: Deploy Velvet Brew
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Get the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2. Log in to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 3. Build and Push the Image
+      - name: Build and Push
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/velvet-brew:${{ github.run_number }} .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/velvet-brew:${{ github.run_number }}
+
+      # 4. Connect to Server and Run Deployment Script
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VM_IP }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_KEY }}
+          script: |
+            # We assume the script is already on the server, or we can copy it.
+            # Here we pass the new image name to the existing script.
+            bash /home/ubuntu/deploy-blue-green.sh ${{ secrets.DOCKERHUB_USERNAME }}/velvet-brew:${{ github.run_number }}

@@ -1,0 +1,162 @@
+/* --- 1. RESET & VARIABLES --- */
+:root {
+    --primary-brown: #4e342e;
+    --accent-gold: #c7a17a;
+    --cream: #f8f5f2;
+    --dark-overlay: rgba(0, 0, 0, 0.7);
+    --glass: rgba(255, 255, 255, 0.1);
+    --font-main: 'Helvetica Neue', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--cream);
+    color: var(--primary-brown);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+/* --- 2. NAVIGATION (Sticky & Glassy) --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: var(--primary-brown);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { color: var(--cream); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+.nav-links a:hover { color: var(--accent-gold); }
+
+.cta-btn {
+    background: var(--accent-gold);
+    color: var(--primary-brown);
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-weight: bold;
+}
+.cta-btn:hover { background: var(--cream); }
+
+/* --- 3. HERO SECTION --- */
+.hero {
+    height: 90vh;
+    background: linear-gradient(var(--dark-overlay), var(--dark-overlay)), 
+                url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--cream);
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 1.5s ease;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.hero-btn {
+    padding: 1rem 2.5rem;
+    border: 2px solid var(--accent-gold);
+    color: var(--accent-gold);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.hero-btn:hover {
+    background: var(--accent-gold);
+    color: var(--primary-brown);
+}
+
+/* --- 4. SECTIONS & GRID --- */
+.container { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+.section-title {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-brown);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+
+.card img { width: 100%; height: 250px; object-fit: cover; }
+.card-content { padding: 1.5rem; }
+.card h3 { font-family: var(--font-heading); margin-bottom: 0.5rem; }
+.price { color: var(--accent-gold); font-weight: bold; font-size: 1.2rem; }
+
+/* --- 5. FOOTER --- */
+footer {
+    background: var(--primary-brown);
+    color: var(--cream);
+    text-align: center;
+    padding: 3rem 1rem;
+    margin-top: auto;
+}
+.footer-links { margin: 1.5rem 0; }
+.footer-links a { margin: 0 10px; color: var(--accent-gold); }
+
+/* --- 6. FORM STYLES (Contact Page) --- */
+.form-group { margin-bottom: 1.5rem; }
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+button[type="submit"] {
+    background: var(--primary-brown);
+    color: var(--accent-gold);
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
